@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fantasy Manhwa List</title>
+</head>
+<body>
+    <h1>Fantasy Manhwa List</h1>
+    <ul id="manhwa-list"></ul>
+
+    <script>
+        fetch('/manhwa')
+            .then(response => response.json())
+            .then(data => {
+                const manhwaList = document.getElementById('manhwa-list');
+                data.forEach(manhwa => {
+                    const listItem = document.createElement('li');
+                    listItem.textContent = `${manhwa.title} - ${manhwa.genre}: ${manhwa.description}`;
+                    manhwaList.appendChild(listItem);
+                });
+            })
+            .catch(err => console.error('Error fetching data:', err));
+    </script>
+</body>
+</html>
